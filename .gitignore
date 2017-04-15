@@ -1,0 +1,8 @@
+.Python
+.idea/
+.vscode/
+.DS_Store
+*.pyc
+
+node_modules/
+npm-debug.log

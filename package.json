@@ -1,0 +1,35 @@
+{
+    "name": "trybaidu",
+    "description": "n/a",
+    "scripts": {
+        "test": "echo \"Error: no test specified.\" && exit 1",
+        "clean": "rm -f *.crx *.zip",
+        "ts-lint": "tslint -c tslint.json 'src/**/*.ts'",
+        "lint-all": "npm run ts-lint",
+        "tsc": "tsc",
+        "remove-tsc": "rm -f src/scripts/*.ts",
+        "bump": "versiony src/manifest.json",
+        "pack": "crx pack src -o trybaidu.crx --zip-output trybaidu.zip",
+        "build": "npm run pack",
+        "reset-repo": "npm run clean && . ./ci/reset_repo.sh"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [],
+    "author": "Wayne Zhang",
+    "license": "MIT",
+    "bugs": {
+        "url": ""
+    },
+    "devDependencies": {
+        "crx": "^3.0.3",
+        "json": "^9.0.4",
+        "tslint": "^3.13.0",
+        "tslint-eslint-rules": "^1.3.0",
+        "typescript": "^2.2.1",
+        "@types/chrome": "^0.0.42",
+        "@types/jquery": "^2.0.41"
+    }
+}

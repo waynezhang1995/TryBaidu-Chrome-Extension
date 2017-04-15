@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New Tab</title>
+
+    <script type="text/javascript" src="../libs/jquery.js"></script>
+    <script type="text/javascript" src="../libs/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="../libs/select2/js/select2.js"></script>
+    <script type="text/javascript" src="../libs/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../libs/lodash.js"></script>
+    <script type="text/javascript" src="../scripts/config.js"></script>
+    <script type="text/javascript" src="../scripts/newtab.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+    <link type="text/css" rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="../libs/select2/css/select2.css" />
+    <link type="text/css" rel="stylesheet" href="../css/newtab.css" />
+    <link type="text/css" rel="stylesheet" href="../css/theme.css" />
+</head>
+
+<body>
+    <header class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="search-types">
+                    <a data-type="web" href="#">Web</a>
+                    <a data-type="image" href="#">Images</a>
+                    <a data-type="video" href="#">Video</a>
+                </div>
+            </div>
+            <div class="col-xs-6 text-right">
+                <div class="toolbar clearfix">
+                    <div>
+                        <span class="time"></span><span class="meridiem"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="options-pane">
+            <strong>Select Background</strong>
+            <a class="options-close" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+            <div class="options-images">
+            </div>
+            <div class="options-colors">
+            </div>
+            <div>
+                <button type="button" class="flickr-button btn btn-default"><img src="../images/brands/flickr.png" /> Flickr</button> <span class="flickr-message"></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <form class="clearfix">
+            <div class="search-engine">
+                <select style="width: 100%">
+                        <option value="bing">Bing</option>
+                        <option value="yahoo">Yahoo</option>
+                        <option value="google">Google</option>
+                        <option value="ask">Ask</option>
+                    </select>
+            </div>
+            <div class="search-query clearfix">
+                <input type="text" />
+                <button type="button" name="button" class="btn search-go"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </form>
+
+        <div class="modal fade" id="summaryModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        <h4 class="modal-title">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </div>
+                                <div class="col-sm-8" id="summaryModalTitle">
+                                    Search Select
+                                </div>
+                            </div>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Customize your new tab experience by choosing a background.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Configure</button>
+                        <a role="button" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </main>
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="flickr-credit col-xs-7"></div>
+                <div class="info-links col-xs-5 text-right"></div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
