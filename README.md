@@ -18,7 +18,7 @@ This extension is managed by npm. Get the latest version of npm.
 sudo apt-get install nodejs npm
 ```
 
-then install dependencies
+then install packages
 ```
 npm install
 ```
