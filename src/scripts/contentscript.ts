@@ -65,7 +65,7 @@ function loadIframe(): void {
     });
 }
 
-$(window).load(function (): void {
+$(document).ready(function (): void {
     inject_icon();
     initButtonListener();
     loadIframe();
