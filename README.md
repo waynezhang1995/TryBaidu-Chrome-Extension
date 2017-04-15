@@ -22,7 +22,7 @@ now compile Typescripts
 npm run tsc
 ```
 ## Google Chrome Extension
-**_disclaimer: Google and Google Chrome are trademarks of Google, Inc. Baidu is a trademark of Baidu, Inc. Trybaidu is an extension for Google Chrome_**
+**_Disclaimer: Google and Google Chrome are trademarks of Google, Inc. Baidu is a trademark of Baidu, Inc. Trybaidu is an extension for Google Chrome_**
 
 ## License
 
