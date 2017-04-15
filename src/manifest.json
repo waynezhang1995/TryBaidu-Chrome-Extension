@@ -24,6 +24,7 @@
     },
     "content_scripts": [{
         "matches": ["https://www.google.ca/*", "https://www.google.com/*"],
+        "exclude_matches": ["https://www.google.ca/maps*", "https://www.google.ca/flights*", "https://www.google.com/maps*", "https://www.google.com/flights*", "https://www.google.com/doodles*"],
         "js": ["libs/jquery.js", "scripts/contentscript.js"],
         "css": ["css/style.css"],
         "run_at": "document_end"

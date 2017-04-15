@@ -10,17 +10,21 @@ const excludedPages = ['https://www.google.ca/?gws_rd=ssl', 'https://www.google.
 let isLoaded: boolean = false;
 
 function inject_icon(): void {
-
     let timer = function (): void {
         setTimeout(function (): void {
-            if (excludedPages.indexOf(window.location.href) === -1) {
+
+            if (excludedPages.indexOf(window.location.href) === -1 && getParameterByName('tbm') !== 'shop'
+                && getParameterByName('gws_rd=ssl#q') !== undefined || getParameterByName('q') !== undefined) {
+
                 let icon: string = '';
                 icon += '<a href="javascript:void(0)" id="injected-button" class="baidu-icon"></a>';
                 $('body').prepend(icon);
                 $('#injected-button').css(
                     { 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' }
                 );
+                if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); }
                 initButtonListener();
+                return;
             } else {
                 timer();
             }
@@ -93,6 +97,23 @@ function initButtonListener(): void {
             show_iframe();
         }
     });
+}
+
+// Helper
+function getParameterByName(name: any, url?: any): string {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, '\\$&');
+    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) {
+        return undefined;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 $(document).ready(function (): void {
