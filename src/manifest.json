@@ -28,7 +28,8 @@
         "run_at": "document_end"
     }],
     "web_accessible_resources": [
-        "images/icons/48.png"
+        "images/icons/48.png",
+        "images/close-button.png"
     ],
     "background": {
         "persistent": true,
