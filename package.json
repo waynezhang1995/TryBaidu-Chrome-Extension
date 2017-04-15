@@ -2,7 +2,6 @@
     "name": "trybaidu",
     "description": "n/a",
     "scripts": {
-        "test": "echo \"Error: no test specified.\" && exit 1",
         "clean": "rm -f *.crx *.zip",
         "ts-lint": "tslint -c tslint.json 'src/**/*.ts'",
         "lint-all": "npm run ts-lint",
@@ -10,18 +9,17 @@
         "remove-tsc": "rm -f src/scripts/*.ts",
         "bump": "versiony src/manifest.json",
         "pack": "crx pack src -o trybaidu.crx --zip-output trybaidu.zip",
-        "build": "npm run pack",
-        "reset-repo": "npm run clean && . ./ci/reset_repo.sh"
+        "build": "npm run pack"
     },
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/waynezhang1995/trybaidu-chrome-extension"
     },
     "keywords": [],
     "author": "Wayne Zhang",
     "license": "MIT",
     "bugs": {
-        "url": ""
+        "url": "https://github.com/waynezhang1995/trybaidu-chrome-extension/issues"
     },
     "devDependencies": {
         "crx": "^3.0.3",
