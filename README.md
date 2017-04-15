@@ -1,6 +1,7 @@
 # Trybaidu - Chrome Extension
 
 One day, im tired of switching between baidu and google....... how about iframing baidu into Google's SERP ?
+
 **Made for fun :)**
 
 ### Baidu ?
