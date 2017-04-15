@@ -1,0 +1,71 @@
+.on-load-overlay {
+    position: fixed;
+    z-index: 999;
+    width: 89.5%;
+    height: 90%;
+    top: 37px;
+    left: 79px;
+    border: solid;
+    background-color: white;
+}
+
+.on-load-overlay p {
+    position: absolute;
+    top: 37%;
+    left: 44%;
+    font-size: 53px;
+    z-index: 1000;
+}
+
+.on-load-overlay p img.on-load-overlay-icon {
+    position: absolute;
+    left: -5%;
+    top: 106%;
+    width: 48px;
+    height: 48px;
+    margin: -60px 0 0 -60px;
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+}
+
+.baidu-iframe {
+    position: fixed;
+    z-index: 999;
+    width: 89.5%;
+    height: 90%;
+    top: 37px;
+    left: 79px;
+    border: solid;
+    display: block;
+}
+
+#injected-button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    border: 1px solid rgb(255, 255, 255);
+    position: fixed;
+    right: 60px;
+    top: 142px;
+    z-index: 999;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

@@ -17,17 +17,9 @@ function inject_icon(): void {
                 let icon: string = '';
                 icon += '<a href="javascript:void(0)" id="injected-button" class="baidu-icon"></a>';
                 $('body').prepend(icon);
-                $('#injected-button').css({
-                    'height': '50px',
-                    'width': '50px',
-                    'border-radius': '50px',
-                    'border': '1px solid #fff',
-                    'position': 'fixed',
-                    'right': '60px',
-                    'top': '142px',
-                    'z-index': '999',
-                    'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat'
-                });
+                $('#injected-button').css(
+                    { 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' }
+                );
                 initButtonListener();
             } else {
                 timer();
@@ -59,20 +51,24 @@ function show_iframe(): void {
 
 function create_iframe(searchQuery: string): void {
     let iframe: string = '';
+    let onLoadOverlay: string = '';
+
     if ($('.baidu-iframe').length) {
         $('.baidu-iframe').remove();
     }
 
+    onLoadOverlay += '<div class="on-load-overlay text-center">';
+    onLoadOverlay += '<p><img class="on-load-overlay-icon" src="' + chrome.extension.getURL(baiduIcon) + '">';
+    onLoadOverlay += 'Loading ....</p></div>';
+    $('body').prepend(onLoadOverlay);
+
     iframe += '<iframe class="baidu-iframe" src="' + baiduQuery + searchQuery + '"></iframe>';
     $('body').prepend(iframe);
-    $('.baidu-iframe').css({
-        'position': 'fixed',
-        'z-index': '999',
-        'width': '89.5%',
-        'height': '90%',
-        'top': '37px',
-        'left': '79px',
-        'border': 'solid'
+    $('.baidu-iframe').hide();
+
+    $('.baidu-iframe').on('load', function (): void {
+        $('.on-load-overlay').remove();
+        $('.baidu-iframe').show();
     });
 
     searchTerm = searchQuery;
