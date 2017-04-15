@@ -46,7 +46,7 @@
     border-radius: 50px;
     border: 0px;
     position: fixed;
-    left: 13px;
+    left: 50px;
     top: 69px;
     z-index: 999;
 }
@@ -55,7 +55,7 @@
     height: 50px;
     width: 50px;
     position: fixed;
-    left: 50px;
+    left: 13px;
     top: 69px;
     z-index: 999;
     border-radius: 50px;
