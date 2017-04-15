@@ -1,9 +1,15 @@
-# Trybaidu
+# Trybaidu - Chrome Extension
 
 One day, im tired of switching between baidu and google....... how about iframing baidu into Google's SERP ?
 
 ### Baidu ?
 The largest search enginer in China - [Baidu](https://en.wikipedia.org/wiki/Baidu)
+
+### Features
+
+1. An Baidu icon will be injected into the top-right corner on Google's search result page. Clicking on the icon will display Baidu's search result page with same search term in a Iframe.
+
+2. If you do want to see Baidu in another new tab page, simply hightlight the term you want to search and right click -> search with Baidu
 
 ## Build Steps
 

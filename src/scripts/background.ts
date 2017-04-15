@@ -7,7 +7,7 @@ function search(info: any, tab: any): void {
 chrome.contextMenus.create({
     contexts: ['selection'],
     onclick: search,
-    title: '百度搜索: %s'
+    title: 'Search with Baidu: %s'
 });
 
 chrome.runtime.onInstalled.addListener((details) => {
