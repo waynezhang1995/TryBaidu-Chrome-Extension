@@ -40,15 +40,26 @@
     display: block;
 }
 
-#injected-button {
+.baidu-icon {
     height: 50px;
     width: 50px;
     border-radius: 50px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 0px;
     position: fixed;
-    right: 60px;
-    top: 142px;
+    left: 13px;
+    top: 69px;
     z-index: 999;
+}
+
+.close-icon {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    left: 13px;
+    top: 69px;
+    z-index: 999;
+    border-radius: 50px;
+    border-width: 0px;
 }
 
 @-moz-keyframes spin {
