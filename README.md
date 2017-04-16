@@ -9,7 +9,7 @@ The largest search enginer in China - [Baidu](https://en.wikipedia.org/wiki/Baid
 
 ### Features
 
-1. A Baidu icon will be injected into the top-right corner on Google's search result page. Clicking on the icon will display Baidu's search result page as an Iframe.
+1. A Baidu icon will be injected into the top-left corner on Google's search result page. Clicking on the icon will display Baidu's search result page as an Iframe.
 
 2. If you do want to see Baidu' search result in another new tab page, simply hightlight the term you want to search and right click -> search with Baidu
 
