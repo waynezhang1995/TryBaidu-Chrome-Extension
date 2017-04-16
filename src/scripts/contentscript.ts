@@ -24,6 +24,7 @@ function inject_icon(): void {
                 );
                 if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); }
                 initButtonListener();
+                bindMessageListener();
                 return;
             } else {
                 timer();
@@ -99,6 +100,30 @@ function initButtonListener(): void {
     });
 }
 
+function hide_icon(): void {
+    if ($('#injected-button').length) {
+        $('#injected-button').hide();
+    }
+}
+
+function show_icon(): void {
+    if ($('#injected-button').length) {
+        $('#injected-button').show();
+    } else {
+        inject_icon(); // Create icon
+    }
+}
+
+function bindMessageListener(): void {
+    chrome.runtime.onMessage.addListener(function(message: any, sender: any, sendResponse: any): void {
+        if (message.isDisable === 'True') {
+            hide_icon();
+        } else {
+            show_icon();
+        }
+    });
+}
+
 // Helper
 function getParameterByName(name: any, url?: any): string {
     if (!url) {
@@ -117,5 +142,15 @@ function getParameterByName(name: any, url?: any): string {
 }
 
 $(document).ready(function (): void {
-    inject_icon();
+
+    // Set current tab's ID
+    chrome.runtime.sendMessage({greeting: 'hello'}, function (response: any): void {
+        chrome.storage.sync.set({'tabID': response.tabID});
+    });
+
+    chrome.storage.sync.get('isDisable', function (obj: any): void {
+        if (obj.isDisable === 'False') {
+            inject_icon();
+        }
+    });
 });
