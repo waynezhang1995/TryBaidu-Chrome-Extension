@@ -19,3 +19,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.browserAction.onClicked.addListener(() => {
     chrome.tabs.create({url: 'https://github.com/waynezhang1995/trybaidu-extension'});
 });
+
+chrome.runtime.onMessage.addListener(function(message: any, sender: any, sendResponse: any): void {
+    sendResponse({'tabID': sender.tab.id});
+});
