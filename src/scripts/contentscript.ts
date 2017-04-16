@@ -24,7 +24,6 @@ function inject_icon(): void {
                 );
                 if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); }
                 initButtonListener();
-                bindMessageListener();
                 return;
             } else {
                 timer();
@@ -147,7 +146,7 @@ $(document).ready(function (): void {
     chrome.runtime.sendMessage({greeting: 'hello'}, function (response: any): void {
         chrome.storage.sync.set({'tabID': response.tabID});
     });
-
+    bindMessageListener();
     chrome.storage.sync.get('isDisable', function (obj: any): void {
         if (obj.isDisable === 'False') {
             inject_icon();
