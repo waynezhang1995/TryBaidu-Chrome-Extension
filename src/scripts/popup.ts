@@ -11,13 +11,17 @@ $(document).ready(function (): void {
             $('#option').text('Enable');
             chrome.storage.sync.set({ 'isDisable': 'True' });
             chrome.storage.sync.get('tabID', function (obj: any): void {
-                chrome.tabs.sendMessage(obj.tabID, {isDisable: 'True'});
+                obj.tabID.forEach(id => {
+                    chrome.tabs.sendMessage(id, {isDisable: 'True'});
+                });
             });
         } else {
             $('#option').text('Disable');
             chrome.storage.sync.set({ 'isDisable': 'False' });
             chrome.storage.sync.get('tabID', function (obj: any): void {
-                chrome.tabs.sendMessage(obj.tabID, {isDisable: 'False'});
+                obj.tabID.forEach(id => {
+                    chrome.tabs.sendMessage(id, {isDisable: 'False'});
+                });
             });
         }
     });

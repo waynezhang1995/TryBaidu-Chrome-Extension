@@ -16,8 +16,17 @@ chrome.runtime.onInstalled.addListener((details) => {
     }
 });
 
-chrome.browserAction.onClicked.addListener(() => {
-    chrome.tabs.create({url: 'https://github.com/waynezhang1995/trybaidu-extension'});
+// Garbage collection. Remove tab ID in the storage
+chrome.tabs.onRemoved.addListener(function (tabID: any): void {
+    chrome.storage.sync.get('tabID', function (obj: any): void {
+        let tabIDList = [];
+        if (obj.tabID !== undefined && obj.tabID.indexOf(tabID) !== -1) {
+            tabIDList = obj.tabID;
+            let index = tabIDList.indexOf(tabID);
+            tabIDList.splice(index, 1);
+            chrome.storage.sync.set({ 'tabID': tabIDList });
+        }
+    });
 });
 
 chrome.runtime.onMessage.addListener(function(message: any, sender: any, sendResponse: any): void {
