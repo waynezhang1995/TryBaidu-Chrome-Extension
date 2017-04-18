@@ -11,9 +11,13 @@ The largest search enginer in China - [Baidu](https://en.wikipedia.org/wiki/Baid
 
 ### Features
 
-1. A Baidu icon will be injected into the top-left corner on Google's search result page. Clicking on the icon will display Baidu's search result page as an Iframe.
+Iframe Baidu into Google's search result page. Save you time from switching between Baidu and Google. Automatically grab the search term in the Google search box. Pre-load Baidu' search result in the background. Show the same search in Baidu is just a simple mouse click !
 
-2. If you do want to see Baidu' search result in another new tab page, simply hightlight the term you want to search and right click -> search with Baidu
+However, if you do want to use Baidu in another new tab, there is always an option to simply highlight the term you want to search, and right click open context menu then "search with Baidu".
+
+###Whats coming up next ?###
+
+1. Enable keyboard shortcut: Set your favourite hotkey to open/close Baidu's search result page
 
 ## Build Steps
 
