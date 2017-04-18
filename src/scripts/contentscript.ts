@@ -15,14 +15,22 @@ function inject_icon(): void {
 
             if (excludedPages.indexOf(window.location.href) === -1 && getParameterByName('tbm') !== 'shop'
                 && getParameterByName('gws_rd=ssl#q') !== undefined || getParameterByName('q') !== undefined) {
-
+                let searchQuery: string = '';
                 let icon: string = '';
+
+                if (getParameterByName('gws_rd=ssl#q') !== undefined) {
+                    searchQuery = getParameterByName('gws_rd=ssl#q');
+                } else if (getParameterByName('q') !== undefined) {
+                    searchQuery = getParameterByName('q');
+                }
+
                 icon += '<a href="javascript:void(0)" id="injected-button" class="baidu-icon"></a>';
                 $('body').prepend(icon);
                 $('#injected-button').css(
                     { 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' }
                 );
                 if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); }
+                create_iframe(searchQuery, true);
                 initButtonListener();
                 return;
             } else {
@@ -35,7 +43,7 @@ function inject_icon(): void {
 }
 
 function show_iframe(): void {
-    let searchQuery: string = $('input.gsfi').val();
+    let searchQuery: string = $('input.gsfi').val(); // TODO. switch this to use parameter in query string
 
     // Grey out Google background
     $('html').css({ 'overflow-y': 'hidden' });
@@ -49,11 +57,11 @@ function show_iframe(): void {
         $('html').css({ 'overflow-y': 'hidden' });
         $('.baidu-iframe').show();
     } else {
-        create_iframe(searchQuery);
+        create_iframe(searchQuery, false);
     }
 }
 
-function create_iframe(searchQuery: string): void {
+function create_iframe(searchQuery: string, isFirstLoad: boolean): void {
     let iframe: string = '';
     let onLoadOverlay: string = '';
 
@@ -61,20 +69,21 @@ function create_iframe(searchQuery: string): void {
         $('.baidu-iframe').remove();
     }
 
-    onLoadOverlay += '<div class="on-load-overlay text-center">';
-    onLoadOverlay += '<p><img class="on-load-overlay-icon" src="' + chrome.extension.getURL(baiduIcon) + '">';
-    onLoadOverlay += 'Loading ....</p></div>';
-    $('body').prepend(onLoadOverlay);
-
     iframe += '<iframe class="baidu-iframe" src="' + baiduQuery + searchQuery + '"></iframe>';
     $('body').prepend(iframe);
     $('.baidu-iframe').hide();
 
-    $('.baidu-iframe').on('load', function (): void {
-        $('.on-load-overlay').remove();
-        $('.baidu-iframe').show();
-    });
+    if (!isFirstLoad) {
+        onLoadOverlay += '<div class="on-load-overlay text-center">';
+        onLoadOverlay += '<p><img class="on-load-overlay-icon" src="' + chrome.extension.getURL(baiduIcon) + '">';
+        onLoadOverlay += 'Loading ....</p></div>';
+        $('body').prepend(onLoadOverlay);
 
+        $('.baidu-iframe').on('load', function (): void {
+            $('.on-load-overlay').remove();
+            $('.baidu-iframe').show();
+        });
+    }
     searchTerm = searchQuery;
     isLoaded = true;
 }
@@ -141,7 +150,6 @@ function getParameterByName(name: any, url?: any): string {
 }
 
 $(document).ready(function (): void {
-
     // Set current tab's ID
     chrome.runtime.sendMessage({greeting: 'hello'}, function (response: any): void {
         chrome.storage.sync.set({'tabID': response.tabID});
