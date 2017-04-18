@@ -15,7 +15,7 @@ Iframe Baidu into Google's search result page. Save you time from switching betw
 
 However, if you do want to use Baidu in another new tab, there is always an option to simply highlight the term you want to search, and right click open context menu then "search with Baidu".
 
-###Whats coming up next ?###
+### Whats coming up next ?###
 
 1. Enable keyboard shortcut: Set your favourite hotkey to open/close Baidu's search result page
 
