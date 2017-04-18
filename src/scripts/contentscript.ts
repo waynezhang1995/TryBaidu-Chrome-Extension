@@ -114,7 +114,7 @@ function show_icon(): void {
 }
 
 function bindMessageListener(): void {
-    chrome.runtime.onMessage.addListener(function(message: any, sender: any, sendResponse: any): void {
+    chrome.runtime.onMessage.addListener(function (message: any, sender: any, sendResponse: any): void {
         if (message.isDisable === 'True') {
             hide_icon();
         } else {
@@ -143,12 +143,20 @@ function getParameterByName(name: any, url?: any): string {
 $(document).ready(function (): void {
 
     // Set current tab's ID
-    chrome.runtime.sendMessage({greeting: 'hello'}, function (response: any): void {
-        chrome.storage.sync.set({'tabID': response.tabID});
+    chrome.runtime.sendMessage({ greeting: 'hello' }, function (response: any): void {
+        chrome.storage.sync.get('tabID', function (obj: any): void {
+            let tabIDList = [];
+            if (obj.tabID !== undefined && obj.tabID.indexOf(response.tabID) === -1) { // Push new tab ID
+                tabIDList = obj.tabID;
+            }
+            tabIDList.push(response.tabID);
+            chrome.storage.sync.set({ 'tabID': tabIDList });
+        });
+
     });
     bindMessageListener();
     chrome.storage.sync.get('isDisable', function (obj: any): void {
-        if (obj.isDisable === 'False') {
+        if (obj.isDisable === undefined || obj.isDisable === 'False') {
             inject_icon();
         }
     });
