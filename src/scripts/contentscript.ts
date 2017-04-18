@@ -31,15 +31,21 @@ function inject_icon(): void {
                 );
                 if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); }
                 create_iframe(searchQuery, true);
-                initButtonListener();
+                bind_input_listener();
+                init_button_listener();
                 return;
             } else {
                 timer();
             }
         }, 500);
     };
-
     timer();
+}
+
+function bind_input_listener(): void {
+    $('input.gsfi').on('change input', function (): void {
+        create_iframe($('input.gsfi').val(), true);
+    });
 }
 
 function show_iframe(): void {
@@ -97,7 +103,7 @@ function hide_iframe(): void {
     $('.baidu-iframe').hide();
 }
 
-function initButtonListener(): void {
+function init_button_listener(): void {
     $('#injected-button').on('click', function (): void {
         event.preventDefault();
         if ($(this).hasClass('close-icon')) {
@@ -149,8 +155,7 @@ function getParameterByName(name: any, url?: any): string {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-$(document).ready(function (): void {
-    // Set current tab's ID
+function set_current_tab(): void {
     chrome.runtime.sendMessage({ greeting: 'hello' }, function (response: any): void {
         chrome.storage.sync.get('tabID', function (obj: any): void {
             let tabIDList = [];
@@ -162,10 +167,22 @@ $(document).ready(function (): void {
         });
 
     });
-    bindMessageListener();
+}
+
+function check_disable(): void {
     chrome.storage.sync.get('isDisable', function (obj: any): void {
         if (obj.isDisable === undefined || obj.isDisable === 'False') {
             inject_icon();
         }
     });
+}
+
+function init(): void {
+    set_current_tab(); // Set current tab's ID
+    bindMessageListener();
+    check_disable();
+}
+
+$(document).ready(function (): void {
+    init();
 });
