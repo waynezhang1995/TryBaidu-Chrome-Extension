@@ -2,6 +2,8 @@
 
 One day, im tired of switching between baidu and google....... how about iframing baidu into Google's SERP ?
 
+Chrome Web Store [Link](https://chrome.google.com/webstore/detail/trybaidu/ifmhokadajfjcndoggkfifjfghbldbmf)
+
 **Made for fun :)**
 
 ### Baidu ?
