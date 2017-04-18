@@ -15,27 +15,41 @@ function inject_icon(): void {
 
             if (excludedPages.indexOf(window.location.href) === -1 && getParameterByName('tbm') !== 'shop'
                 && getParameterByName('gws_rd=ssl#q') !== undefined || getParameterByName('q') !== undefined) {
-
+                let searchQuery: string = '';
                 let icon: string = '';
+
+                if (getParameterByName('gws_rd=ssl#q') !== undefined) {
+                    searchQuery = getParameterByName('gws_rd=ssl#q');
+                } else if (getParameterByName('q') !== undefined) {
+                    searchQuery = getParameterByName('q');
+                }
+
                 icon += '<a href="javascript:void(0)" id="injected-button" class="baidu-icon"></a>';
                 $('body').prepend(icon);
                 $('#injected-button').css(
                     { 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' }
                 );
                 if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); }
-                initButtonListener();
+                create_iframe(searchQuery, true);
+                bind_input_listener();
+                init_button_listener();
                 return;
             } else {
                 timer();
             }
         }, 500);
     };
-
     timer();
 }
 
+function bind_input_listener(): void {
+    $('input.gsfi').on('change input', function (): void {
+        create_iframe($('input.gsfi').val(), true);
+    });
+}
+
 function show_iframe(): void {
-    let searchQuery: string = $('input.gsfi').val();
+    let searchQuery: string = $('input.gsfi').val(); // TODO. switch this to use parameter in query string
 
     // Grey out Google background
     $('html').css({ 'overflow-y': 'hidden' });
@@ -49,11 +63,11 @@ function show_iframe(): void {
         $('html').css({ 'overflow-y': 'hidden' });
         $('.baidu-iframe').show();
     } else {
-        create_iframe(searchQuery);
+        create_iframe(searchQuery, false);
     }
 }
 
-function create_iframe(searchQuery: string): void {
+function create_iframe(searchQuery: string, isFirstLoad: boolean): void {
     let iframe: string = '';
     let onLoadOverlay: string = '';
 
@@ -61,20 +75,21 @@ function create_iframe(searchQuery: string): void {
         $('.baidu-iframe').remove();
     }
 
-    onLoadOverlay += '<div class="on-load-overlay text-center">';
-    onLoadOverlay += '<p><img class="on-load-overlay-icon" src="' + chrome.extension.getURL(baiduIcon) + '">';
-    onLoadOverlay += 'Loading ....</p></div>';
-    $('body').prepend(onLoadOverlay);
-
     iframe += '<iframe class="baidu-iframe" src="' + baiduQuery + searchQuery + '"></iframe>';
     $('body').prepend(iframe);
     $('.baidu-iframe').hide();
 
-    $('.baidu-iframe').on('load', function (): void {
-        $('.on-load-overlay').remove();
-        $('.baidu-iframe').show();
-    });
+    if (!isFirstLoad) {
+        onLoadOverlay += '<div class="on-load-overlay text-center">';
+        onLoadOverlay += '<p><img class="on-load-overlay-icon" src="' + chrome.extension.getURL(baiduIcon) + '">';
+        onLoadOverlay += 'Loading ....</p></div>';
+        $('body').prepend(onLoadOverlay);
 
+        $('.baidu-iframe').on('load', function (): void {
+            $('.on-load-overlay').remove();
+            $('.baidu-iframe').show();
+        });
+    }
     searchTerm = searchQuery;
     isLoaded = true;
 }
@@ -88,7 +103,7 @@ function hide_iframe(): void {
     $('.baidu-iframe').hide();
 }
 
-function initButtonListener(): void {
+function init_button_listener(): void {
     $('#injected-button').on('click', function (): void {
         event.preventDefault();
         if ($(this).hasClass('close-icon')) {
@@ -140,9 +155,7 @@ function getParameterByName(name: any, url?: any): string {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-$(document).ready(function (): void {
-
-    // Set current tab's ID
+function set_current_tab(): void {
     chrome.runtime.sendMessage({ greeting: 'hello' }, function (response: any): void {
         chrome.storage.sync.get('tabID', function (obj: any): void {
             let tabIDList = [];
@@ -154,10 +167,22 @@ $(document).ready(function (): void {
         });
 
     });
-    bindMessageListener();
+}
+
+function check_disable(): void {
     chrome.storage.sync.get('isDisable', function (obj: any): void {
         if (obj.isDisable === undefined || obj.isDisable === 'False') {
             inject_icon();
         }
     });
+}
+
+function init(): void {
+    set_current_tab(); // Set current tab's ID
+    bindMessageListener();
+    check_disable();
+}
+
+$(document).ready(function (): void {
+    init();
 });
