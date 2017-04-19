@@ -13,16 +13,11 @@ function inject_icon(): void {
     let timer = function (): void {
         setTimeout(function (): void {
 
-            if (excludedPages.indexOf(window.location.href) === -1 && getParameterByName('tbm') !== 'shop'
-                && getParameterByName('gws_rd=ssl#q') !== undefined || getParameterByName('q') !== undefined) {
+            if (excludedPages.indexOf(window.location.href) === -1 && $('input.gsfi').val() !== undefined) {
                 let searchQuery: string = '';
                 let icon: string = '';
 
-                if (getParameterByName('gws_rd=ssl#q') !== undefined) {
-                    searchQuery = getParameterByName('gws_rd=ssl#q');
-                } else if (getParameterByName('q') !== undefined) {
-                    searchQuery = getParameterByName('q');
-                }
+                searchQuery = $('input.gsfi').val();
 
                 icon += '<a href="javascript:void(0)" id="injected-button" class="baidu-icon"></a>';
                 $('body').prepend(icon);
