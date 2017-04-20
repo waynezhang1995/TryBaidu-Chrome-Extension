@@ -9,7 +9,8 @@
         "remove-tsc": "rm -f src/scripts/*.ts",
         "bump": "versiony src/manifest.json",
         "pack": "crx pack src -o trybaidu.crx --zip-output trybaidu.zip",
-        "build": "npm run pack"
+        "build": "npm run pack",
+        "test": "npm run lint-all"
     },
     "repository": {
         "type": "git",
