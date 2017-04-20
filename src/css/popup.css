@@ -6,3 +6,11 @@
 #option {
     margin-left: 40%;
 }
+
+.instructin {
+    color: red;
+    text-align: center;
+    display: none;
+    font-size: 18px;
+    font-weight: 700;
+}

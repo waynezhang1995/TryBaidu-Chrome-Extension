@@ -1,7 +1,7 @@
 .on-load-overlay {
     position: fixed;
     z-index: 999;
-    width: 89.5%;
+    width: 92%;
     height: 90%;
     top: 37px;
     left: 79px;
@@ -32,7 +32,7 @@
 .baidu-iframe {
     position: fixed;
     z-index: 999;
-    width: 89.5%;
+    width: 92%;
     height: 90%;
     top: 37px;
     left: 79px;

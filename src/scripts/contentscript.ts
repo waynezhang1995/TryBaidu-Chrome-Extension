@@ -1,19 +1,15 @@
 const baiduQuery: string = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=';
 const baiduIcon: string = 'images/icons/48.png';
 const closeButtonIcon: string = 'images/close-button.png';
+
 let searchTerm: string = '';
-
-// This should be done in the manifest file :(
-const excludedPages = ['https://www.google.ca/?gws_rd=ssl', 'https://www.google.ca',
-    'https://www.google.com/?gws_rd=ssl', 'https://www.google.com'];
-
 let isLoaded: boolean = false;
 
 function inject_icon(): void {
     let timer = function (): void {
         setTimeout(function (): void {
 
-            if (excludedPages.indexOf(window.location.href) === -1 && $('input.gsfi').val() !== undefined) {
+            if ($('input.gsfi').val() !== undefined && $('input.gsfi').val() !== '') {
                 let searchQuery: string = '';
                 let icon: string = '';
 
@@ -123,7 +119,7 @@ function show_icon(): void {
     }
 }
 
-function bindMessageListener(): void {
+function bind_message_listener(): void {
     chrome.runtime.onMessage.addListener(function (message: any, sender: any, sendResponse: any): void {
         if (message.isDisable === 'True') {
             hide_icon();
@@ -174,7 +170,7 @@ function check_disable(): void {
 
 function init(): void {
     set_current_tab(); // Set current tab's ID
-    bindMessageListener();
+    bind_message_listener();
     check_disable();
 }
 
