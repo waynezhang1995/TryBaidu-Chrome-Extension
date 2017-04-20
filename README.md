@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/waynezhang1995/trybaidu-chrome-extension.svg?branch=master)](https://travis-ci.org/waynezhang1995/trybaidu-chrome-extension)
+
 # Trybaidu - Chrome Extension
 
 One day, im tired of switching between baidu and google....... how about iframing baidu into Google's SERP ?
