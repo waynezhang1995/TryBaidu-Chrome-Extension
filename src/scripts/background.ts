@@ -12,7 +12,7 @@ chrome.contextMenus.create({
 
 chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
-        chrome.tabs.create({url: 'https://github.com/waynezhang1995/trybaidu-extension'});
+        chrome.storage.sync.set({'isFirstInstall': 'True' });
     }
 });
 
