@@ -31,7 +31,7 @@ function inject_icon(): void {
         }, 500);
     };
     timer();
-}
+}s
 
 function bind_input_listener(): void {
     $('input.gsfi').on('change input', function (): void {
