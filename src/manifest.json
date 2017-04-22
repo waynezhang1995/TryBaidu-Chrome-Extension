@@ -3,7 +3,7 @@
     "name": "trybaidu",
     "author": "Wayne Zhang",
     "description": "Save your time from switching between Baidu and Google",
-    "version": "1.0.5",
+    "version": "1.1.5",
     "icons": {
         "16": "images/icons/16.png",
         "32": "images/icons/32.png",
@@ -33,6 +33,7 @@
     "web_accessible_resources": [
         "images/icons/48.png",
         "images/close-button.png",
+        "images/open-newtab.png",
         "css/style.css"
     ],
     "background": {
