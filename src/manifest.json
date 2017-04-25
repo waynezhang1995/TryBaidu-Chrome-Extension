@@ -33,6 +33,7 @@
     "web_accessible_resources": [
         "images/icons/48.png",
         "images/close-button.png",
+        "images/open-newtab.png",
         "css/style.css"
     ],
     "background": {

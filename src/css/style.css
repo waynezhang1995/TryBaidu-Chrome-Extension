@@ -62,6 +62,17 @@
     border-width: 0px;
 }
 
+.newtab-icon {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    left: 13px;
+    top: 150px;
+    z-index: 999;
+    border-radius: 50px;
+    border-width: 0px;
+}
+
 @-moz-keyframes spin {
     100% {
         -moz-transform: rotate(360deg);
