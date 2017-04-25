@@ -1,6 +1,7 @@
 const baiduQuery: string = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=';
 const baiduIcon: string = 'images/icons/48.png';
 const closeButtonIcon: string = 'images/close-button.png';
+const newTabButtonIcon: string = 'images/open-newtab.png';
 
 let searchTerm: string = '';
 let isLoaded: boolean = false;
@@ -39,9 +40,16 @@ function bind_input_listener(): void {
     });
 }
 
+function bind_newtab_button_listener(): void {
+    $('.newtab-icon').on('click', function (): void {
+        hide_iframe();
+        window.open(baiduQuery + searchTerm);
+    });
+}
+
 function show_iframe(): void {
     let searchQuery: string = $('input.gsfi').val(); // TODO. switch this to use parameter in query string
-
+    let newTabIcon: string = '<a href="javascript:void(0)" class="newtab-icon" title="Open in a new tab page"></a>';
     // Grey out Google background
     $('html').css({ 'overflow-y': 'hidden' });
     $('#viewport').css({ 'filter': 'grayscale(1)' });
@@ -49,6 +57,15 @@ function show_iframe(): void {
     // Toggle button class
     $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(closeButtonIcon) + ') no-repeat' });
     $('#injected-button').toggleClass('close-icon baidu-icon');
+
+    // Show new tab icon
+    $('body').prepend(newTabIcon);
+    $('.newtab-icon').css(
+        { 'background': 'url(' + chrome.extension.getURL(newTabButtonIcon) + ') no-repeat' }
+    );
+
+    // Bind new tab button listener
+    bind_newtab_button_listener();
 
     if (isLoaded && searchTerm === searchQuery) {
         $('html').css({ 'overflow-y': 'hidden' });
@@ -89,6 +106,7 @@ function hide_iframe(): void {
     // Bring google back
     $('#viewport').css({ 'filter': '' });
     $('html').css({ 'overflow-y': 'auto' });
+    $('.newtab-icon').remove();
     $('#injected-button').toggleClass('close-icon baidu-icon');
     $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' });
     $('.baidu-iframe').hide();
