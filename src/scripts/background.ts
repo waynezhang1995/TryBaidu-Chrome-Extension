@@ -11,9 +11,15 @@ chrome.contextMenus.create({
 });
 
 chrome.runtime.onInstalled.addListener((details) => {
-    if (details.reason === 'install') {
-        chrome.storage.sync.set({'isFirstInstall': 'True' });
-    }
+    chrome.tabs.query({}, function(tabs: any): void {
+        tabs.forEach(tab => {
+            if (tab.url.includes('q=')) {
+                if (tab.url.includes('google.ca/?') || tab.url.includes('google.com/?')) {
+                    chrome.tabs.reload(tab.id);
+                }
+            }
+        });
+    });
 });
 
 // Garbage collection. Remove tab ID in the storage
