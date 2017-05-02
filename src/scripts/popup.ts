@@ -1,15 +1,4 @@
 $(document).ready(function (): void {
-
-    // Check if this is first install
-
-    chrome.storage.sync.get('isFirstInstall', function(obj: any): void {
-        if (obj.isFirstInstall === 'True') {
-            $('.instructin').fadeIn('slow');
-            obj.isFirstInstall = 'False';
-            chrome.storage.sync.set(obj);
-        }
-    });
-
     chrome.storage.sync.get('isDisable', function (obj: any): void {
         if (obj.isDisable === 'True') {
             $('#option').text('Enable');

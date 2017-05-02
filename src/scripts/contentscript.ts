@@ -171,10 +171,14 @@ function set_current_tab(): void {
             if (obj.tabID !== undefined && obj.tabID.indexOf(response.tabID) === -1) { // Push new tab ID
                 tabIDList = obj.tabID;
             }
+
+            if (obj.tabID.indexOf(response.tabID) !== -1) {
+                return;
+            }
+
             tabIDList.push(response.tabID);
             chrome.storage.sync.set({ 'tabID': tabIDList });
         });
-
     });
 }
 
