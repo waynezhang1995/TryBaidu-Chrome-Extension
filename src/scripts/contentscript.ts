@@ -5,6 +5,7 @@ const newTabButtonIcon: string = 'images/open-newtab.png';
 
 let searchTerm: string = '';
 let isLoaded: boolean = false;
+let iconFixed: boolean = false;
 
 function inject_icon(): void {
     let timer = function (): void {
@@ -25,6 +26,7 @@ function inject_icon(): void {
                 create_iframe(searchQuery, true);
                 bind_input_listener();
                 init_button_listener();
+                apply_settings();
                 return;
             } else {
                 timer();
@@ -48,14 +50,14 @@ function bind_newtab_button_listener(): void {
 }
 
 function show_iframe(): void {
-    let searchQuery: string = $('input.gsfi').val(); // TODO. switch this to use parameter in query string
-    let newTabIcon: string = '<a href="javascript:void(0)" class="newtab-icon" title="Open in a new tab page"></a>';
+    let searchQuery: string = $('input.gsfi').val();
+    let newTabIcon: string = '<a href="javascript:void(0)" class="tooltip newtab-icon"><span class="tooltiptext">Open in a new tab page</span></a>';
     // Grey out Google background
     $('html').css({ 'overflow-y': 'hidden' });
     $('#viewport').css({ 'filter': 'grayscale(1)' });
 
     // Toggle button class
-    $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(closeButtonIcon) + ') no-repeat' });
+    $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(closeButtonIcon) + ') no-repeat' , 'position': 'fixed'});
     $('#injected-button').toggleClass('close-icon baidu-icon');
 
     // Show new tab icon
@@ -110,6 +112,10 @@ function hide_iframe(): void {
     $('#injected-button').toggleClass('close-icon baidu-icon');
     $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' });
     $('.baidu-iframe').hide();
+
+    if (iconFixed) {
+        $('#injected-button').css('position', 'absolute');
+    }
 }
 
 function init_button_listener(): void {
@@ -139,10 +145,20 @@ function show_icon(): void {
 
 function bind_message_listener(): void {
     chrome.runtime.onMessage.addListener(function (message: any, sender: any, sendResponse: any): void {
-        if (message.isDisable === 'True') {
-            hide_icon();
-        } else {
-            show_icon();
+        if (message.isDisable) {
+            if (message.isDisable === 'True') {
+                hide_icon();
+            } else {
+                show_icon();
+            }
+        } else if (message.settings) {
+            if (message.settings['position_fix'] === 'True') { // Icon fixes at top-left corner
+                $('#injected-button').css('position', 'absolute');
+                iconFixed = true;
+            } else {
+                $('#injected-button').css('position', 'fixed');
+                iconFixed = false;
+            }
         }
     });
 }
@@ -168,14 +184,15 @@ function set_current_tab(): void {
     chrome.runtime.sendMessage({ greeting: 'hello' }, function (response: any): void {
         chrome.storage.sync.get('tabID', function (obj: any): void {
             let tabIDList = [];
-            if (obj.tabID !== undefined && obj.tabID.indexOf(response.tabID) === -1) { // Push new tab ID
-                tabIDList = obj.tabID;
-            }
+            if (obj.tabID !== undefined) {
+                if (obj.tabID.indexOf(response.tabID) === -1) { // Push new tab ID
+                    tabIDList = obj.tabID;
+                }
 
-            if (obj.tabID.indexOf(response.tabID) !== -1) {
-                return;
+                if (obj.tabID.indexOf(response.tabID) !== -1) {
+                    return;
+                }
             }
-
             tabIDList.push(response.tabID);
             chrome.storage.sync.set({ 'tabID': tabIDList });
         });
@@ -186,6 +203,20 @@ function check_disable(): void {
     chrome.storage.sync.get('isDisable', function (obj: any): void {
         if (obj.isDisable === undefined || obj.isDisable === 'False') {
             inject_icon();
+        }
+    });
+}
+
+function apply_settings(): void {
+    chrome.storage.sync.get('settings', function (obj: any): void {
+        if (obj.settings !== undefined) { // If settings is undefined, use default
+            if (obj.settings['position_fix'] === 'True') { // Icon fixes at top-left corner
+                $('#injected-button').css('position', 'absolute');
+                iconFixed = true;
+            } else {
+                $('#injected-button').css('position', 'fixed');
+                iconFixed = false;
+            }
         }
     });
 }

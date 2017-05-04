@@ -17,7 +17,7 @@
         "label-position": true,
         "label-undefined": true,
         "linebreak-style": [true, "LF"],
-        "max-line-length": [true, 120],
+        "max-line-length": [true, 150],
         "new-parens": true,
         "no-angle-bracket-type-assertion": true,
         "no-arg": true,
@@ -41,7 +41,7 @@
         "no-null-keyword": true,
         "no-require-imports": true,
         "no-shadowed-variable": true,
-        "no-string-literal": true,
+        "no-string-literal": false,
         "no-switch-case-fall-through": true,
         "no-trailing-whitespace": true,
         "no-unreachable": true,
@@ -68,7 +68,7 @@
         ],
         "switch-default": true,
         "trailing-comma": [
-            true, 
+            true,
             {
                 "multiline": "never",
                 "singleline": "never"
