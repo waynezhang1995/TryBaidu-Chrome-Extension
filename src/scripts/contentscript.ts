@@ -250,7 +250,7 @@ function bind_keyboard_listener(): void {
     });
 
     $(document).keydown(function (e: any): void {
-        if (ctrlDown && (e.keyCode === backtickKey) && hotkeyEnable) {
+        if (ctrlDown && (e.keyCode === backtickKey) && hotkeyEnable && $('#injected-button').css('display') === 'block') {
             if ($('.baidu-iframe').css('display') === 'block') {
                 hide_iframe();
             } else {
