@@ -67,6 +67,10 @@ function check_settings(): void {
             if (obj.settings['position_fix'] === 'True') { // Icon fixes at top-left corner
                 $('#position_fix').bootstrapToggle('on');
             }
+
+            if (obj.settings['keyboard_shortcut'] === 'True') {
+                $('#keyboard_shortcut').bootstrapToggle('on');
+            }
         }
     });
 }

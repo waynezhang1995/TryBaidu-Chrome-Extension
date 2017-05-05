@@ -17,7 +17,7 @@ The largest search enginer in China - [Baidu](https://en.wikipedia.org/wiki/Baid
 
  - Pre-load the Baidu' search result as you type.
 
- - Display Baidu's search results using the ```ctrl + back-tip``` keyboard shortcut
+ - Display Baidu's search results using the ```ctrl + back-tip``` keyboard shortcut (Default to be disabled)
 
  - View Baidu in a new tab as an option.
 

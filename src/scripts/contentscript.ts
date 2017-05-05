@@ -7,6 +7,7 @@ let searchTerm: string = '';
 let isLoaded: boolean = false;
 let iconFixed: boolean = false;
 let ctrlDown: boolean = false;
+let hotkeyEnable: boolean = false;
 let ctrlKey = 17;
 let backtickKey = 192;
 
@@ -162,6 +163,12 @@ function bind_message_listener(): void {
                 $('#injected-button').css('position', 'fixed');
                 iconFixed = false;
             }
+
+            if (message.settings['keyboard_shortcut'] === 'True') {
+                hotkeyEnable = true;
+            } else {
+                hotkeyEnable = false;
+            }
         }
     });
 }
@@ -220,9 +227,15 @@ function apply_settings(): void {
                 $('#injected-button').css('position', 'fixed');
                 iconFixed = false;
             }
+
+            if (obj.settings['keyboard_shortcut'] === 'True') {
+                hotkeyEnable = true;
+            } else {
+                hotkeyEnable = false;
+            }
+            bind_keyboard_listener();
         }
     });
-    bind_keyboard_listener();
 }
 
 function bind_keyboard_listener(): void {
@@ -237,7 +250,7 @@ function bind_keyboard_listener(): void {
     });
 
     $(document).keydown(function (e: any): void {
-        if (ctrlDown && (e.keyCode === backtickKey)) { // If ctrl is pressed
+        if (ctrlDown && (e.keyCode === backtickKey) && hotkeyEnable) {
             if ($('.baidu-iframe').css('display') === 'block') {
                 hide_iframe();
             } else {
