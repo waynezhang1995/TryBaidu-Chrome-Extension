@@ -6,6 +6,10 @@ const newTabButtonIcon: string = 'images/open-newtab.png';
 let searchTerm: string = '';
 let isLoaded: boolean = false;
 let iconFixed: boolean = false;
+let ctrlDown: boolean = false;
+let hotkeyEnable: boolean = false;
+let ctrlKey = 17;
+let backtickKey = 192;
 
 function inject_icon(): void {
     let timer = function (): void {
@@ -159,6 +163,12 @@ function bind_message_listener(): void {
                 $('#injected-button').css('position', 'fixed');
                 iconFixed = false;
             }
+
+            if (message.settings['keyboard_shortcut'] === 'True') {
+                hotkeyEnable = true;
+            } else {
+                hotkeyEnable = false;
+            }
         }
     });
 }
@@ -216,6 +226,35 @@ function apply_settings(): void {
             } else {
                 $('#injected-button').css('position', 'fixed');
                 iconFixed = false;
+            }
+
+            if (obj.settings['keyboard_shortcut'] === 'True') {
+                hotkeyEnable = true;
+            } else {
+                hotkeyEnable = false;
+            }
+            bind_keyboard_listener();
+        }
+    });
+}
+
+function bind_keyboard_listener(): void {
+    $(document).keydown(function (e: any): void {
+        if (e.keyCode === ctrlKey) {
+            ctrlDown = true;
+        }
+    }).keyup(function (e: any): void {
+        if (e.keyCode === ctrlKey) {
+            ctrlDown = false;
+        }
+    });
+
+    $(document).keydown(function (e: any): void {
+        if (ctrlDown && (e.keyCode === backtickKey) && hotkeyEnable && $('#injected-button').css('display') === 'block') {
+            if ($('.baidu-iframe').css('display') === 'block') {
+                hide_iframe();
+            } else {
+                show_iframe();
             }
         }
     });

@@ -15,15 +15,24 @@
     font-weight: 700;
 }
 
-#position_setting_label {
-    padding-right: 23px;
+.code {
+    color: red;
 }
 
-.instruction-toggle {
+#position_setting_label {
+    padding-right: 29px;
+}
+
+.instruction-toggle,
+.instruction-toggle-keyboard {
     cursor: help;
 }
 
 .instruction-toggle:hover .instruction {
+    visibility: visible;
+}
+
+.instruction-toggle-keyboard:hover .instruction-keyboard {
     visibility: visible;
 }
 
@@ -38,4 +47,17 @@
     position: absolute;
     z-index: 1;
     margin: 30px 0 0 -125px;
+}
+
+.instruction-toggle-keyboard .instruction-keyboard {
+    visibility: hidden;
+    width: 210px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    margin: 34px 0 0 -125px;
 }
