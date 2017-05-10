@@ -26,7 +26,7 @@ function inject_icon(): void {
                 $('#injected-button').css(
                     { 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' }
                 );
-                if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); }
+                if (getParameterByName('tbm') === 'isch') { $('.baidu-icon').css({ 'position': 'absolute' }); } // Image
                 create_iframe(searchQuery, true);
                 bind_input_listener();
                 init_button_listener();
@@ -199,7 +199,7 @@ function set_current_tab(): void {
                     tabIDList = obj.tabID;
                 }
 
-                if (obj.tabID.indexOf(response.tabID) !== -1) {
+                if (obj.tabID.indexOf(response.tabID) !== -1) { // Tab ID already there. Return
                     return;
                 }
             }
