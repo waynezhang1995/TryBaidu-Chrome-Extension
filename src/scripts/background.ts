@@ -11,12 +11,14 @@ chrome.contextMenus.create({
 });
 
 chrome.runtime.onInstalled.addListener((details) => {
-    chrome.tabs.query({}, function(tabs: any): void {
+    chrome.tabs.query({}, function (tabs: any): void {
         tabs.forEach(tab => {
             if (tab.url.includes('q=')) {
-                if (tab.url.includes('google.ca/?') || tab.url.includes('google.com/?')) {
-                    chrome.tabs.reload(tab.id);
-                }
+                validDomain.forEach(domain => {
+                    if (tab.url.includes(domain)) {
+                        chrome.tabs.reload(tab.id);
+                    }
+                });
             }
         });
     });
@@ -35,6 +37,6 @@ chrome.tabs.onRemoved.addListener(function (tabID: any): void {
     });
 });
 
-chrome.runtime.onMessage.addListener(function(message: any, sender: any, sendResponse: any): void {
-    sendResponse({'tabID': sender.tab.id});
+chrome.runtime.onMessage.addListener(function (message: any, sender: any, sendResponse: any): void {
+    sendResponse({ 'tabID': sender.tab.id });
 });

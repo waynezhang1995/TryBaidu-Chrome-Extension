@@ -1,21 +1,9 @@
-const baiduQuery: string = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=';
-const baiduIcon: string = 'images/icons/48.png';
-const closeButtonIcon: string = 'images/close-button.png';
-const newTabButtonIcon: string = 'images/open-newtab.png';
-
-let searchTerm: string = '';
-let isLoaded: boolean = false;
-let iconFixed: boolean = false;
-let ctrlDown: boolean = false;
-let hotkeyEnable: boolean = false;
-let ctrlKey = 17;
-let backtickKey = 192;
-
 function inject_icon(): void {
     let timer = function (): void {
         setTimeout(function (): void {
 
-            if ($('input.gsfi').val() !== undefined && $('input.gsfi').val() !== '') {
+            if ($('input.gsfi').val() !== undefined && $('input.gsfi').val() !== '' &&
+                ($('div #resultStats').length > 0 || getParameterByName('q') !== undefined)) {
                 let searchQuery: string = '';
                 let icon: string = '';
 
@@ -61,7 +49,7 @@ function show_iframe(): void {
     $('#viewport').css({ 'filter': 'grayscale(1)' });
 
     // Toggle button class
-    $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(closeButtonIcon) + ') no-repeat' , 'position': 'fixed'});
+    $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(closeButtonIcon) + ') no-repeat', 'position': 'fixed'});
     $('#injected-button').toggleClass('close-icon baidu-icon');
 
     // Show new tab icon
@@ -89,7 +77,14 @@ function create_iframe(searchQuery: string, isFirstLoad: boolean): void {
         $('.baidu-iframe').remove();
     }
 
-    iframe += '<iframe class="baidu-iframe" src="' + baiduQuery + searchQuery + '"></iframe>';
+    let searchCategory: string = getParameterByName('tbm');
+
+    if (searchCategory === 'isch') { // Images
+        iframe += '<iframe class="baidu-iframe" src="' + baiduImageQuery + searchQuery + '"></iframe>';
+    } else {
+        iframe += '<iframe class="baidu-iframe" src="' + baiduQuery + searchQuery + '"></iframe>';
+    }
+
     $('body').prepend(iframe);
     $('.baidu-iframe').hide();
 
