@@ -1,4 +1,3 @@
-
 function inject_icon(): void {
     let timer = function (): void {
         setTimeout(function (): void {
