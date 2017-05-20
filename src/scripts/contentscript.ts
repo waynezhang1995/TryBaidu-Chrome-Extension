@@ -228,8 +228,8 @@ function apply_settings(): void {
             } else {
                 hotkeyEnable = false;
             }
-            bind_keyboard_listener();
         }
+        bind_keyboard_listener();
     });
 }
 
