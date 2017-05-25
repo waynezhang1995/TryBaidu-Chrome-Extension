@@ -13,31 +13,36 @@ The largest search engine in China - [Baidu](https://en.wikipedia.org/wiki/Baidu
 
  - Iframe Baidu into Google's search result page.
 
- - Automatically grab search term from the Google's search box.
+ - Automatically extract search term from the Google's search box.
 
- - Pre-load the Baidu' search result as you type.
+ - Pre-load the Baidu' search result at background as you type.
 
  - Display Baidu's search results using the ```ctrl + back-tip``` keyboard shortcut (Default to be disabled)
 
- - View Baidu in a new tab as an option.
+ - Expand Baidu's search result to a new tab page.
 
  - Highlight any key words or sentences and right click open context menu then "search with Baidu".
 
 ## Build Steps
 
-This extension is managed by npm. Get the latest version of npm.
+Get the latest version of NPM.
 ```
 sudo apt-get install nodejs npm
 ```
 
-then install packages
+Then install packages
 ```
 npm install
 ```
 
-now compile Typescripts
+Now compile Typescripts
 ```
 npm run tsc
+```
+
+Linting
+```
+npm run test
 ```
 ## Disclaimer
 **_Google and Google Chrome are trademarks of Google, Inc. Baidu is a trademark of Baidu, Inc. Trybaidu is an extension for Google Chrome_**
