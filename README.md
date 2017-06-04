@@ -25,7 +25,7 @@ The largest search engine in China - [Baidu](https://en.wikipedia.org/wiki/Baidu
 
 ### Known Bugs
 
- - Cannot open Baidu's images/news/videos/tieba/map etc. with left click inside the Iframe. This is due to the violation of Mixed Content prolicy (above links are loaded over HTTP whereas Google is loaded over HTTPS). A possible work around: open thoses links in a new tab page. 
+ - Cannot open Baidu's images/news/videos/tieba/map etc. with left click inside the Iframe. This is due to the violation of Mixed Content prolicy (above links are loaded over HTTP whereas Google is loaded over HTTPS). A possible work around: mouse middle click or right click and open in a newtab page. 
 
 ## Build Steps
 
