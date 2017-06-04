@@ -23,6 +23,10 @@ The largest search engine in China - [Baidu](https://en.wikipedia.org/wiki/Baidu
 
  - Highlight any key words or sentences and right click open context menu then "search with Baidu".
 
+### Known Bugs
+
+ - Cannot open Baidu's images/news/videos/tieba/map etc. with left click inside the Iframe. This is due to the violation of Mixed Content prolicy (above links are loaded over HTTP whereas Google is loaded over HTTPS). A possible work around: open thoses links in a new tab page. 
+
 ## Build Steps
 
 Get the latest version of NPM.
