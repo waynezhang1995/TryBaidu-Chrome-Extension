@@ -14,14 +14,14 @@ chrome.runtime.onInstalled.addListener((details) => {
     chrome.tabs.query({}, function (tabs: any): void {
         tabs.forEach(tab => {
             if (tab.url.includes('q=')) {
-                validDomain.forEach(domain => {
-                    if (tab.url.includes(domain)) {
-                        chrome.tabs.reload(tab.id);
-                    }
-                });
-            }
-        });
+            validDomain.forEach(domain => {
+                if (tab.url.includes(domain)) {
+                    chrome.tabs.reload(tab.id);
+                }
+            });
+        }
     });
+});
 });
 
 // Garbage collection. Remove tab ID in the storage
