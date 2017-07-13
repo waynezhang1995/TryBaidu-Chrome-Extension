@@ -6,7 +6,7 @@ Chrome Web Store [Link](https://chrome.google.com/webstore/detail/trybaidu/ifmho
 
 If you find it useful please leave a [review](https://chrome.google.com/webstore/detail/trybaidu/ifmhokadajfjcndoggkfifjfghbldbmf/reviews)
 
-### Baidu ?
+### What is Baidu ?
 The largest search engine in China - [Baidu](https://en.wikipedia.org/wiki/Baidu)
 
 ### Features
