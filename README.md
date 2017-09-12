@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/waynezhang1995/Trybaidu-Chrome-Extension.svg?branch=master)](https://travis-ci.org/waynezhang1995/Trybaidu-Chrome-Extension)
+[![Build Status](https://travis-ci.org/waynezhang1995/TryBaidu-Chrome-Extension.svg?branch=master)](https://travis-ci.org/waynezhang1995/TryBaidu-Chrome-Extension)
 
 # TryBaidu - Chrome Extension
 
