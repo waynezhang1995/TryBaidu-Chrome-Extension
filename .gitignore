@@ -3,6 +3,7 @@
 .vscode/
 .DS_Store
 *.pyc
+*.zip
 
 node_modules/
 npm-debug.log
