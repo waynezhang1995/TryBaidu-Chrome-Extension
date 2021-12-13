@@ -27,27 +27,6 @@ The largest search engine in China - [Baidu](https://en.wikipedia.org/wiki/Baidu
 
  - Cannot open Baidu's images/news/videos/tieba/map etc. with left click inside the Iframe. This is due to the violation of Mixed Content prolicy (above links are loaded over HTTP whereas Google is loaded over HTTPS). A possible work around: mouse middle click or right click and open in a newtab page.
 
-## Build Steps
-
-Get the latest version of NPM.
-```
-sudo apt-get install nodejs npm
-```
-
-Then install packages
-```
-npm install
-```
-
-Now compile Typescripts
-```
-npm run tsc
-```
-
-Linting
-```
-npm run test
-```
 ## Disclaimer
 **_Google and Google Chrome are trademarks of Google, Inc. Baidu is a trademark of Baidu, Inc. Trybaidu is an extension for Google Chrome_**
 
