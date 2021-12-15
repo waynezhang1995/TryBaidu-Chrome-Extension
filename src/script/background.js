@@ -1,4 +1,4 @@
-function search(info: any, tab: any): void {
+function search(info) {
     chrome.tabs.create({
         url: 'http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=' + info.selectionText
     });
@@ -10,23 +10,23 @@ chrome.contextMenus.create({
     title: 'Search with Baidu: %s'
 });
 
-chrome.runtime.onInstalled.addListener((details) => {
-    chrome.tabs.query({}, function (tabs: any): void {
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.tabs.query({}, function (tabs) {
         tabs.forEach(tab => {
             if (tab.url.includes('q=')) {
-            validDomain.forEach(domain => {
-                if (tab.url.includes(domain)) {
-                    chrome.tabs.reload(tab.id);
-                }
-            });
-        }
+                validDomain.forEach(domain => {
+                    if (tab.url.includes(domain)) {
+                        chrome.tabs.reload(tab.id);
+                    }
+                });
+            }
+        });
     });
-});
 });
 
 // Garbage collection. Remove tab ID in the storage
-chrome.tabs.onRemoved.addListener(function (tabID: any): void {
-    chrome.storage.sync.get('tabID', function (obj: any): void {
+chrome.tabs.onRemoved.addListener(function (tabID) {
+    chrome.storage.sync.get('tabID', function (obj) {
         let tabIDList = [];
         if (obj.tabID !== undefined && obj.tabID.indexOf(tabID) !== -1) {
             tabIDList = obj.tabID;
@@ -37,6 +37,6 @@ chrome.tabs.onRemoved.addListener(function (tabID: any): void {
     });
 });
 
-chrome.runtime.onMessage.addListener(function (message: any, sender: any, sendResponse: any): void {
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     sendResponse({ 'tabID': sender.tab.id });
 });

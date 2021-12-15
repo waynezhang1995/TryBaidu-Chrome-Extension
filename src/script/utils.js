@@ -1,15 +1,14 @@
-/* tslint:disable:no-unused-variable */
 
-const baiduQuery: string = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=';
-const baiduImageQuery: string = 'https://image.baidu.com/search/index?tn=baiduimage&word=';
-const baiduIcon: string = 'images/icons/48.png';
-const closeButtonIcon: string = 'images/close-button.png';
-const newTabButtonIcon: string = 'images/open-newtab.png';
-let searchTerm: string = '';
-let isLoaded: boolean = false;
-let iconFixed: boolean = false;
-let ctrlDown: boolean = false;
-let hotkeyEnable: boolean = false;
+const baiduQuery = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd=';
+const baiduImageQuery = 'https://image.baidu.com/search/index?tn=baiduimage&word=';
+const baiduIcon = 'images/icons/48.png';
+const closeButtonIcon = 'images/close-button.png';
+const newTabButtonIcon = 'images/open-newtab.png';
+let searchTerm = '';
+let isLoaded = false;
+let iconFixed = false;
+let ctrlDown = false;
+let hotkeyEnable = false;
 let ctrlKey = 17;
 let backtickKey = 192;
 

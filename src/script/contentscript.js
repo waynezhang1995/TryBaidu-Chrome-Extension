@@ -1,15 +1,15 @@
-function inject_icon(): void {
-    let timer = function (): void {
-        setTimeout(function (): void {
+function inject_icon() {
+    let timer = function () {
+        setTimeout(function () {
 
             if ($('input.gsfi').val() !== undefined && $('input.gsfi').val() !== '' &&
                 ($('div #resultStats').length > 0 || getParameterByName('q') !== undefined)) {
-                let searchQuery: string = '';
-                let icon: string = '';
+                let searchQuery = '';
+                let icon = '';
 
                 searchQuery = $('input.gsfi').val();
 
-                icon += '<a href="javascript:void(0)" id="injected-button" class="baidu-icon"></a>';
+                icon += '<a href="javascrip(0)" id="injected-button" class="baidu-icon"></a>';
                 $('body').prepend(icon);
                 $('#injected-button').css(
                     { 'background': 'url(' + chrome.extension.getURL(baiduIcon) + ') no-repeat' }
@@ -28,28 +28,28 @@ function inject_icon(): void {
     timer();
 }
 
-function bind_input_listener(): void {
-    $('input.gsfi').on('change input', function (): void {
+function bind_input_listener() {
+    $('input.gsfi').on('change input', function () {
         create_iframe($('input.gsfi').val(), true);
     });
 }
 
-function bind_newtab_button_listener(): void {
-    $('.newtab-icon').on('click', function (): void {
+function bind_newtab_button_listener() {
+    $('.newtab-icon').on('click', function () {
         hide_iframe();
         window.open(baiduQuery + searchTerm);
     });
 }
 
-function show_iframe(): void {
-    let searchQuery: string = $('input.gsfi').val();
-    let newTabIcon: string = '<a href="javascript:void(0)" class="tooltip newtab-icon"><span class="tooltiptext">Open in a new tab page</span></a>';
+function show_iframe() {
+    let searchQuery = $('input.gsfi').val();
+    let newTabIcon = '<a href="javascrip(0)" class="tooltip newtab-icon"><span class="tooltiptext">Open in a new tab page</span></a>';
     // Grey out Google background
     $('html').css({ 'overflow-y': 'hidden' });
     $('#viewport').css({ 'filter': 'grayscale(1)' });
 
     // Toggle button class
-    $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(closeButtonIcon) + ') no-repeat', 'position': 'fixed'});
+    $('#injected-button').css({ 'background': 'url(' + chrome.extension.getURL(closeButtonIcon) + ') no-repeat', 'position': 'fixed' });
     $('#injected-button').toggleClass('close-icon baidu-icon');
 
     // Show new tab icon
@@ -69,15 +69,15 @@ function show_iframe(): void {
     }
 }
 
-function create_iframe(searchQuery: string, isFirstLoad: boolean): void {
-    let iframe: string = '';
-    let onLoadOverlay: string = '';
+function create_iframe(searchQuery, isFirstLoad) {
+    let iframe = '';
+    let onLoadOverlay = '';
 
     if ($('.baidu-iframe').length) {
         $('.baidu-iframe').remove();
     }
 
-    let searchCategory: string = getParameterByName('tbm');
+    let searchCategory = getParameterByName('tbm');
 
     if (searchCategory === 'isch') { // Images
         iframe += '<iframe class="baidu-iframe" src="' + baiduImageQuery + searchQuery + '"></iframe>';
@@ -94,7 +94,7 @@ function create_iframe(searchQuery: string, isFirstLoad: boolean): void {
         onLoadOverlay += 'Loading ....</p></div>';
         $('body').prepend(onLoadOverlay);
 
-        $('.baidu-iframe').on('load', function (): void {
+        $('.baidu-iframe').on('load', function () {
             $('.on-load-overlay').remove();
             $('.baidu-iframe').show();
         });
@@ -103,7 +103,7 @@ function create_iframe(searchQuery: string, isFirstLoad: boolean): void {
     isLoaded = true;
 }
 
-function hide_iframe(): void {
+function hide_iframe() {
     // Bring google back
     $('#viewport').css({ 'filter': '' });
     $('html').css({ 'overflow-y': 'auto' });
@@ -117,8 +117,8 @@ function hide_iframe(): void {
     }
 }
 
-function init_button_listener(): void {
-    $('#injected-button').on('click', function (): void {
+function init_button_listener() {
+    $('#injected-button').on('click', function () {
         event.preventDefault();
         if ($(this).hasClass('close-icon')) {
             hide_iframe();
@@ -128,13 +128,13 @@ function init_button_listener(): void {
     });
 }
 
-function hide_icon(): void {
+function hide_icon() {
     if ($('#injected-button').length) {
         $('#injected-button').hide();
     }
 }
 
-function show_icon(): void {
+function show_icon() {
     if ($('#injected-button').length) {
         $('#injected-button').show();
     } else {
@@ -142,8 +142,8 @@ function show_icon(): void {
     }
 }
 
-function bind_message_listener(): void {
-    chrome.runtime.onMessage.addListener(function (message: any, sender: any, sendResponse: any): void {
+function bind_message_listener() {
+    chrome.runtime.onMessage.addListener(function (message) {
         if (message.isDisable) {
             if (message.isDisable === 'True') {
                 hide_icon();
@@ -169,7 +169,7 @@ function bind_message_listener(): void {
 }
 
 // Helper
-function getParameterByName(name: any, url?: any): string {
+function getParameterByName(name, url) {
     if (!url) {
         url = window.location.href;
     }
@@ -185,9 +185,9 @@ function getParameterByName(name: any, url?: any): string {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-function set_current_tab(): void {
-    chrome.runtime.sendMessage({ greeting: 'hello' }, function (response: any): void {
-        chrome.storage.sync.get('tabID', function (obj: any): void {
+function set_current_tab() {
+    chrome.runtime.sendMessage({ greeting: 'hello' }, function (response) {
+        chrome.storage.sync.get('tabID', function (obj) {
             let tabIDList = [];
             if (obj.tabID !== undefined) {
                 if (obj.tabID.indexOf(response.tabID) === -1) { // Push new tab ID
@@ -204,16 +204,16 @@ function set_current_tab(): void {
     });
 }
 
-function check_disable(): void {
-    chrome.storage.sync.get('isDisable', function (obj: any): void {
+function check_disable() {
+    chrome.storage.sync.get('isDisable', function (obj) {
         if (obj.isDisable === undefined || obj.isDisable === 'False') {
             inject_icon();
         }
     });
 }
 
-function apply_settings(): void {
-    chrome.storage.sync.get('settings', function (obj: any): void {
+function apply_settings() {
+    chrome.storage.sync.get('settings', function (obj) {
         if (obj.settings !== undefined) { // If settings is undefined, use default
             if (obj.settings['position_fix'] === 'True') { // Icon fixes at top-left corner
                 $('#injected-button').css('position', 'absolute');
@@ -233,18 +233,18 @@ function apply_settings(): void {
     });
 }
 
-function bind_keyboard_listener(): void {
-    $(document).keydown(function (e: any): void {
+function bind_keyboard_listener() {
+    $(document).keydown(function (e) {
         if (e.keyCode === ctrlKey) {
             ctrlDown = true;
         }
-    }).keyup(function (e: any): void {
+    }).keyup(function (e) {
         if (e.keyCode === ctrlKey) {
             ctrlDown = false;
         }
     });
 
-    $(document).keydown(function (e: any): void {
+    $(document).keydown(function (e) {
         if (ctrlDown && (e.keyCode === backtickKey) && hotkeyEnable && $('#injected-button').css('display') === 'block') {
             if ($('.baidu-iframe').css('display') === 'block') {
                 hide_iframe();
@@ -255,12 +255,12 @@ function bind_keyboard_listener(): void {
     });
 }
 
-function init(): void {
+function init() {
     set_current_tab(); // Set current tab's ID
     bind_message_listener();
     check_disable();
 }
 
-$(document).ready(function (): void {
+$(document).ready(function () {
     init();
 });
